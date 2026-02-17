@@ -45,28 +45,3 @@ public class LAB01 { // Name should start with capital letter
         sc.close();
     }
 }
-
-/*
-
-- byte code output is in what file ?? ANS -> .class file
-- it is platform independent -> byte code can run in all OS.
-- it's pass by value...find why ?
-- Multiple inheritance ??....why possible or not ?
-- Only one class can be defined....every class has one source file...as a part of main class
-- How to achieve functionality of multiple Java files, like we do in C++.
-- for viva innovative research.
-- Structure of JVM and it's functionality
-- Demonstrate the Concurrency
-- Do this in command line in linux
-
-Solve all the configuration issue of ur IDE
-
-
-Required:
-- class: methods, variables, inheritance
-- super class
-- Supports single inheritance for classes (multiple inheritance via interfaces only).
-- no deconstruction ??
-
-in addition, take the marks as a constructor
-*/
