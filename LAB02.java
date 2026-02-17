@@ -1,117 +1,90 @@
 import java.util.Scanner;
 
-// ================= BASE CLASS =================
-abstract class Employee {
-    private String name;
+// base
+class Employee {
+    protected String name;
     protected double salary;
 
-    // Constructor
     Employee(String name, double salary) {
         this.name = name;
         this.salary = salary;
-        System.out.println("Employee constructor called");
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void displaySalary() {
         System.out.println("Employee Name: " + name);
         System.out.println("Salary: " + salary);
     }
-
-    // Abstract method
-    public abstract void calculateSalary();
 }
 
-// ============ SINGLE + HIERARCHICAL ============
+// deri 1
 class FullTimeEmployee extends Employee {
 
     FullTimeEmployee(String name, double salary) {
         super(name, salary);
-        System.out.println("FullTimeEmployee constructor called");
     }
 
-    @Override
     public void calculateSalary() {
-        System.out.println("\n--- Full Time Employee ---");
-        System.out.println("Before Hike:");
-        displaySalary();
-
-        salary += salary * 0.50;
-
-        System.out.println("After 50% Hike:");
-        displaySalary();
+        salary += salary * 0.50;  // 50% hike
     }
 }
 
-// ========== HIERARCHICAL ==========
+// deri 2
 class InternEmployee extends Employee {
 
     InternEmployee(String name, double salary) {
         super(name, salary);
-        System.out.println("InternEmployee constructor called");
     }
 
-    @Override
     public void calculateSalary() {
-        System.out.println("\n--- Intern Employee ---");
-        System.out.println("Before Hike:");
-        displaySalary();
-
-        salary += salary * 0.25;
-
-        System.out.println("After 25% Hike:");
-        displaySalary();
+        salary += salary * 0.25;  // 25% hike
     }
 }
 
-// ========== MULTILEVEL ==========
-class TraineeIntern extends InternEmployee {
-
-    TraineeIntern(String name, double salary) {
-        super(name, salary);
-        System.out.println("TraineeIntern constructor called");
-    }
-
-    public void traineeInfo() {
-        System.out.println("\n--- Trainee Intern ---");
-        displaySalary();
-    }
-}
-
-// ================= MAIN CLASS =================
-public class Main {
+public class LAB02 {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
+        char choice;
 
-        System.out.print("Enter Full Time Employee Name: ");
-        String fName = sc.nextLine();
-        System.out.print("Enter Salary: ");
-        double fSalary = sc.nextDouble();
-        sc.nextLine();
+        do {
+            System.out.println("\nSelect Employee Type:");
+            System.out.println("1. Full Time Employee");
+            System.out.println("2. Intern Employee");
+            System.out.print("Enter choice (1 or 2): ");
+            int type = sc.nextInt();
+            sc.nextLine(); //buffer clear karne ke liye ?
 
-        Employee fte = new FullTimeEmployee(fName, fSalary);
-        fte.calculateSalary();
+            System.out.print("Enter Employee Name: ");
+            String name = sc.nextLine();
 
-        System.out.print("\nEnter Intern Name: ");
-        String iName = sc.nextLine();
-        System.out.print("Enter Salary: ");
-        double iSalary = sc.nextDouble();
-        sc.nextLine();
+            System.out.print("Enter Salary: ");
+            double salary = sc.nextDouble();
 
-        Employee intern = new InternEmployee(iName, iSalary);
-        intern.calculateSalary();
+            if (type == 1) {
+                FullTimeEmployee emp = new FullTimeEmployee(name, salary);
+                System.out.println("\nBefore Hike:");
+                emp.displaySalary();
+                emp.calculateSalary();
+                System.out.println("After 50% Hike:");
+                emp.displaySalary();
 
-        System.out.print("\nEnter Trainee Name: ");
-        String tName = sc.nextLine();
-        System.out.print("Enter Salary: ");
-        double tSalary = sc.nextDouble();
+            } else if (type == 2) {
+                InternEmployee emp = new InternEmployee(name, salary);
+                System.out.println("\nBefore Hike:");
+                emp.displaySalary();
+                emp.calculateSalary();
+                System.out.println("After 25% Hike:");
+                emp.displaySalary();
 
-        TraineeIntern trainee = new TraineeIntern(tName, tSalary);
-        trainee.traineeInfo();
+            } else {
+                System.out.println("Invalid choice!");
+            }
+
+            System.out.print("\nDo you want to enter another employee? (y/n): ");
+            choice = sc.next().charAt(0);
+            sc.nextLine();
+
+        } while (choice == 'y' || choice == 'Y');
 
         sc.close();
     }
